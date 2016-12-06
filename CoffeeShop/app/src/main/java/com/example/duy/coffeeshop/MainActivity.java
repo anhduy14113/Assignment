@@ -51,12 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view){
         TextView orderSummary = (TextView) findViewById(R.id.order_summary_text_view);
-        if(mAdapter.x.isEmpty()) {
-            orderSummary.setText("Yes");
-        }else {
-            orderSummary.setText("No");
+        for(int i=0;i<drinkList.size();i++) {
+            orderSummary.setText("Your order:\n" + drinkList.get(i).getName() + drinkList.get(i).getQuantity());
         }
-        orderSummary.setText("Your order:\n" + mAdapter.x.get(1));
-
     }
 }

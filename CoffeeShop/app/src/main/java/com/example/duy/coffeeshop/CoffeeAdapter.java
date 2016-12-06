@@ -16,11 +16,10 @@ import java.util.List;
  */
 public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.ViewHolder> {
 
-    private List<Data> drinkList;
-    public String[] x;
-
+    public List<Data> drink;
+    Data data;
     public CoffeeAdapter(List<Data> myDataset) {
-        this.drinkList = myDataset;
+        this.drink = myDataset;
     }
 
     @Override
@@ -38,16 +37,13 @@ public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // update MyCustomEditTextListener every time we bind a new item
         // so that it knows what item in mDataset to update
-        Data data = drinkList.get(position);
-        holder.mTextView.setText(data.getName());
-        holder.mEditText.setText(data.getQuantity());
-        holder.myCustomEditTextListener.updatePosition(position);
-
+        holder.myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
+        holder.mEditText.setText(drink.get(holder.getAdapterPosition()).toString());
     }
 
     @Override
     public int getItemCount() {
-        return drinkList.size();
+        return drink.size();
     }
 
 
@@ -88,7 +84,8 @@ public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.ViewHolder
 
         @Override
         public void afterTextChanged(Editable editable) {
-//            x.add(drinkList.get(position).getName() + " : " + editable);
+            //int no = Integer.parseInt(editable.toString());
+            data.setQuantity(editable.toString());
         }
     }
 }
